@@ -1,0 +1,54 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Kysymyksiä ja vastauksia</title>
+        <meta charset="utf-8" />
+    </head>
+
+    <body>
+        <h1>Kysymykset listattuna</h1>
+        <div>Kysymys (id, kurssi, aihe, vastausteksti)</div>
+        <ul>
+            <li th:each="kysymys: ${kysymykset}">
+                <span th:text="${kysymys.id}"></span>
+                <span th:text="${kysymys.kurssi}"></span>
+                <span th:text="${kysymys.aihe}"></span>
+                <span th:text="${kysymys.kysymysteksti}"></span>
+            </li>
+        </ul>
+        
+        <h1>Vastaukset listattuna</h1>
+        
+        <span>Vastaus (id, kysymyksen id, mihin on vastattu, vastausteksti, totuusarvo</span>
+        <ul>
+            <li th:each="vastaus: ${vastaukset}">
+                <span th:text="${vastaus.id}"></span>
+                <span th:text="${vastaus.kysymys_id}"></span>
+                <span th:text="${vastaus.vastausteksti}"></span>
+                <span th:text="${vastaus.oikein}"></span>
+                
+            </li>
+        </ul>
+        
+        <h1>Poista kysymys</h1>
+        
+        <form action="/poistakysymys" method="POST">
+
+            <span> Kysymys(poista id:llä): </span><input type="text" name="kysymys.id"/><br/>
+           <input type="submit" value="poista"/>
+        </form>
+        
+        
+        <h1>Poista vastaus</h1>
+        
+        <form action="/poistavastaus" method="POST">
+
+            <span> Vastaus(poista id:llä): </span><input type="text" name="vastaus.id"/><br/>
+           <input type="submit" value="poista"/>
+        </form>
+        
+        
+        
+    </body>
+</html>
